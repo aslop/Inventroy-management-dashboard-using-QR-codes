@@ -11,7 +11,7 @@ import { LoginPage } from './pages';
 import { RegisterPage } from './pages';
 
 // Components
-import { MainNav } from './components/MainNav';
+import { MainNav } from './components';
 import { GuardedRoute } from './containers/GuardedRoute';
 
 const App: FC = () => {

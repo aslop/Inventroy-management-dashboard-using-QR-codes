@@ -1,4 +1,4 @@
-import { LoginForm } from '../components/LoginForm';
+import { LoginForm } from '../components';
 import { useRedirectIfUserExists } from '../hooks';
 
 export const LoginPage = () => {
