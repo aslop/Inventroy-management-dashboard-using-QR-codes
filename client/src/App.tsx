@@ -11,9 +11,8 @@ import { LoginPage } from './pages';
 import { RegisterPage } from './pages';
 
 // Components
-import { MainNav } from './components';
+import { MainNav } from './components/MainNav';
 import { GuardedRoute } from './containers/GuardedRoute';
-
 const App: FC = () => {
   const user = localStorage.getItem('user');
 
