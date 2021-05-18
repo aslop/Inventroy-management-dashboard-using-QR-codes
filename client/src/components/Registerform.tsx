@@ -22,9 +22,9 @@ export const Registerform = () => {
         className="flex flex-col bg-white shadow-lg w-full h-full p-10 rounded-md"
         onSubmit={handleLogin}
       >
-        <div className="text-xl font-bold text-gray-800">Register</div>
+        <div className="text-xl font-bold text-gray-800 mb-4">Register</div>
         <input
-          className="border my-2 p-2 rounded-sm"
+          className="my-2 p-2 px-3 rounded border-none bg-gray-100 focus:outline-none focus:ring focus:border-blue-200"
           type="email"
           placeholder="your@email.com"
           onChange={(e) => {
@@ -32,7 +32,7 @@ export const Registerform = () => {
           }}
         />
         <input
-          className="border my-2 p-2 rounded-sm"
+          className="my-2 p-2 px-3 rounded-sm bg-gray-100 focus:outline-none focus:ring focus:border-blue-200"
           type="password"
           placeholder="s3cur3p4sSw0rd!"
           onChange={(e) => {
