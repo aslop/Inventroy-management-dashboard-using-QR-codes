@@ -18,6 +18,13 @@ const userSchema = new Schema<IUser>({
     enum: ['admin', 'operator'],
     required: true,
   },
+
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Item',
+    },
+  ],
 });
 
 userSchema.methods.hashPassword = async function (password: string) {

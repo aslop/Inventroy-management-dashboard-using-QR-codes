@@ -8,6 +8,13 @@ const itemSchema = new Schema<IItem>(
       required: true,
     },
 
+    users: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+
     properties: Schema.Types.Mixed,
   },
   { strict: false }

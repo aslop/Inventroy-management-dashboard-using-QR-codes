@@ -9,6 +9,7 @@ import { Home } from './pages';
 import { PageNotFound } from './pages';
 import { LoginPage } from './pages';
 import { RegisterPage } from './pages';
+import { Items } from './pages';
 
 // Components
 import { SideNav } from './components/SideNav/SideNav';
@@ -26,6 +27,7 @@ const App: FC = () => {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
               <GuardedRoute exact path="/" component={Home} />
+              <GuardedRoute exact path="/items" component={Items} />
               <Route component={PageNotFound} />
             </Switch>
           </div>

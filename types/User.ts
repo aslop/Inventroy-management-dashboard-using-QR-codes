@@ -6,4 +6,5 @@ export interface IUser extends Document {
   password: string;
   role: 'admin' | 'operator' | 'client';
   hashPassword: (password: string) => Promise<string>;
+  items: any; //todo
 }
