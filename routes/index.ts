@@ -1,14 +1,12 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 const router: Router = Router();
 import auth from './auth/index';
+import isUserAuthed from '../middlewares/isUserAuthed';
 
-//
-import { getUserFromCookies } from '../utils/Auth/AuthUtils';
-//
 router.use('/api/auth', auth);
 
-router.get('/shouldBeAuthed', async (req, res) => {
-  const user = await getUserFromCookies(req, res);
+router.get('/shouldBeAuthed', isUserAuthed, async (req: Request, res: Response) => {
+  const { user } = res.locals;
 
   if (user) {
     res.status(200).send({ user });
