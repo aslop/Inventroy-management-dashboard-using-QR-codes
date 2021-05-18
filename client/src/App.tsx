@@ -11,7 +11,7 @@ import { LoginPage } from './pages';
 import { RegisterPage } from './pages';
 
 // Components
-import { SideNav } from './components/SideNav';
+import { SideNav } from './components/SideNav/SideNav';
 import { GuardedRoute } from './containers/GuardedRoute';
 const App: FC = () => {
   const user = localStorage.getItem('user');
