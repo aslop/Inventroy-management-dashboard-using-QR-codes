@@ -6,15 +6,21 @@ export const Home = () => {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const { data } = await axios.get(
-        '/shouldBeAuthed',
+      try {
+        const { data } = await axios.get(
+          '/shouldBeAuthed',
 
-        {
-          withCredentials: true,
+          {
+            withCredentials: true,
+          }
+        );
+
+        setAuthedData(data);
+      } catch (e) {
+        if (e.response.status === 401) {
+          console.log('Not Authorized');
         }
-      );
-
-      setAuthedData(data);
+      }
     }
 
     fetchMyAPI();
