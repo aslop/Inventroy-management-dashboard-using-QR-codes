@@ -5,9 +5,10 @@ import { PlusCircle, MinusCircle } from 'react-feather';
 interface IProps {
   items: any[];
   setItems: (e: any) => void;
+  toggleForm: () => void;
 }
 
-export const ItemForm: FC<IProps> = ({ items, setItems }) => {
+export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
   const [itemName, setItemName] = useState('');
   const [inputList, setInputList] = useState<any>([]);
 
@@ -46,6 +47,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems }) => {
         }, {}),
       });
 
+      toggleForm();
       setItems([...items, item]);
     } else {
       const {
@@ -54,6 +56,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems }) => {
         name: itemName,
       });
 
+      toggleForm();
       setItems([...items, item]);
     }
   };

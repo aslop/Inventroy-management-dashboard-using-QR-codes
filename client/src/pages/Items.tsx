@@ -57,7 +57,9 @@ export const Items = () => {
         </button>
       ) : null}
 
-      {showForm || items.length <= 0 ? <ItemForm items={items} setItems={setItems} /> : null}
+      {showForm || items.length <= 0 ? (
+        <ItemForm items={items} setItems={setItems} toggleForm={toggleForm} />
+      ) : null}
 
       <ItemsList items={items} />
     </div>
