@@ -8,7 +8,7 @@ const itemSchema = new Schema<IItem>(
       required: true,
     },
 
-    Properties: [Schema.Types.Mixed],
+    properties: Schema.Types.Mixed,
   },
   { strict: false }
 );

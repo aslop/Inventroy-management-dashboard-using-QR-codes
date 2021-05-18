@@ -8,9 +8,9 @@ const isUserAuthed = async (req: Request, res: Response, next: NextFunction) => 
     if (user) {
       res.locals.user = user;
       next();
+    } else {
+      res.status(401).send('unauthorized');
     }
-
-    return false;
   } catch (error) {
     console.log(error);
   }
