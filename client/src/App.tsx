@@ -11,7 +11,7 @@ import { LoginPage } from './pages';
 import { RegisterPage } from './pages';
 
 // Components
-import { MainNav } from './components/MainNav';
+import { SideNav } from './components/SideNav';
 import { GuardedRoute } from './containers/GuardedRoute';
 const App: FC = () => {
   const user = localStorage.getItem('user');
@@ -19,14 +19,16 @@ const App: FC = () => {
   return (
     <AuthProvider user={user}>
       <Router>
-        <MainNav />
-        <div className="w-full">
-          <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/register" component={RegisterPage} />
-            <GuardedRoute exact path="/" component={Home} />
-            <Route component={PageNotFound} />
-          </Switch>
+        <div className="flex">
+          <SideNav />
+          <div className="w-full">
+            <Switch>
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
+              <GuardedRoute exact path="/" component={Home} />
+              <Route component={PageNotFound} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </AuthProvider>
