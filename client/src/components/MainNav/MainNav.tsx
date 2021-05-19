@@ -41,7 +41,7 @@ export const MainNav = () => {
           <span>Register</span>
         </NavItem>
 
-        {currentUser ? (
+        {/* {currentUser ? (
           <button
             onClick={async () => {
               await logout();
@@ -50,7 +50,7 @@ export const MainNav = () => {
           >
             Logout
           </button>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );
