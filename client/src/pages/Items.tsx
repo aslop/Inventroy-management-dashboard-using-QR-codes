@@ -36,7 +36,7 @@ export const Items = () => {
 
   return (
     <div className="p-6 w-full">
-      <div className="flex flex-row items-center justify-between mb-4">
+      <div className="flex flex-row items-center justify-between mb-4 sticky top-0 bg-white py-6">
         <h1 className="font-bold text-3xl text-gray-700">Items</h1>
         <button
           onClick={toggleForm}

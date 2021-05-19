@@ -4,7 +4,11 @@ import { User } from '../../models/User';
 
 const create = async (req: Request, res: Response) => {
   try {
-    const { name, properties } = req.body;
+    console.log('Posting on item');
+    console.log(req.body);
+    console.log('Posting on item');
+
+    const { name, amount, properties } = req.body;
 
     const user = await User.findOne({ _id: res.locals.user.id });
 
@@ -14,6 +18,7 @@ const create = async (req: Request, res: Response) => {
 
     const newItem = new Item({
       name,
+      amount,
       properties,
       user: user.id,
     });

@@ -14,7 +14,13 @@ const deleteOne = async (req: Request, res: Response) => {
     }
 
     if (item.user == user.id) {
-      const item = await Item.findOneAndDelete({ _id: id });
+      await Item.findOneAndDelete({ _id: id });
+
+      user.items = user.items.filter((e: string) => {
+        return e != id;
+      });
+
+      await user.save();
 
       res.status(200).send('ok');
     }
