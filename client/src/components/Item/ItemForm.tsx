@@ -63,12 +63,12 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
 
   return (
     <form
-      className="border rounded-md my-4 p-6"
+      className="border rounded-md my-4 p-6 max-w-xl bg-gray-100"
       onSubmit={(e) => {
         e.preventDefault();
       }}
     >
-      <h1 className="text-xl font-bold ">New item:</h1>
+      <h1 className="text-xl font-bold">New item:</h1>
       <hr className="my-4" />
 
       <div className="flex flex-col">
@@ -77,7 +77,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
         <input
           name="name"
           placeholder="My awesome item"
-          className="bg-gray-200 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200"
+          className=" border rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200"
           onChange={(e) => {
             setItemName(e.target.value);
           }}
@@ -86,13 +86,13 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
 
       {inputList.map((x: any, i: number) => {
         return (
-          <div className="my-4 flex flex-col" key={i}>
+          <div className="my-4 flex flex-col border bg-white p-6 border-gray-200" key={i}>
             <span className="mb-2 text-gray-500 text-sm">Custom property name:</span>
             <input
               name="name"
               placeholder="Color"
               value={x.name}
-              className="bg-gray-200 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200 mb-4"
+              className="bg-gray-100 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200 mb-4"
               onChange={(e) => handleInputChange(e, i)}
             />
 
@@ -101,7 +101,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
               name="value"
               value={x.value}
               placeholder="Red"
-              className="bg-gray-200 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200"
+              className="bg-gray-100 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-200"
               onChange={(e) => handleInputChange(e, i)}
             />
 

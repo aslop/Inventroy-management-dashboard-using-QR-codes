@@ -10,5 +10,7 @@ export const ItemsList: FC<IProps> = ({ items }) => {
     return null;
   }
 
-  return <Table items={items} />;
+  const tableHeads = ['Name', 'Properties', 'Amount', 'actions'];
+
+  return <Table items={items} tableHeads={tableHeads} />;
 };

@@ -1,6 +1,10 @@
-import { FC, SyntheticEvent } from 'react';
-import { Edit, Trash } from 'react-feather';
-import { useHistory } from 'react-router-dom';
+import { FC, SyntheticEvent, useState } from 'react';
+import { Edit, Trash, Archive } from 'react-feather';
+import { Link } from 'react-router-dom';
+import { CustomPropertiesBlock } from './CustomPropertiesBlock';
+import { useToggle } from '../../hooks';
+
+import axios from 'axios';
 
 interface IProps {
   item: {
@@ -12,46 +16,69 @@ interface IProps {
 }
 
 export const Row: FC<IProps> = ({ item: { id, name, properties, amount } }) => {
-  const history = useHistory();
+  const [shouldHide, setShouldHide] = useState(false);
+  const [showModal, toggleModal] = useToggle();
 
-  if (!id) {
+  const handleDelete = async () => {
+    await axios.delete(`/api/items/${id}`, {
+      withCredentials: true,
+    });
+    setShouldHide(true);
+  };
+
+  if (!id || shouldHide) {
     return null;
   }
 
-  const redirectToItem = (ev: SyntheticEvent) => {
-    ev.stopPropagation();
-
-    history.push(`/items/${id}`);
-  };
-
   return (
-    <tr
-      className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
-      onClick={redirectToItem}
-    >
-      <td className="py-3 px-6 text-left">
+    <tr>
+      <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
-          <span>{name}</span>
+          <div className="flex-shrink-0 h-8 w-8 bg-indigo-100 rounded-full flex items-center justify-center">
+            <Archive size={16} className="text-indigo-400" />
+          </div>
+          <div className="ml-4">
+            <div className="text-sm font-medium text-gray-900 hover:text-indigo-500 text-md">
+              <Link to={`/items/${id}`}>{name} </Link>
+            </div>
+            <div className="text-sm text-gray-500">{id}</div>
+          </div>
         </div>
       </td>
-      <td className="py-3 px-6 text-center">
-        <div className="flex items-center">{JSON.stringify(properties)}</div>
-      </td>
-      <td className="py-3 px-6 text-left">
-        <div className="flex items-center">
-          <span>{amount}</span>
-        </div>
+      <td className="px-6 py-4 whitespace-nowrap border-r border-l">
+        <CustomPropertiesBlock properties={properties} />
       </td>
 
-      <td className="py-3 px-6 text-center">
-        <div className="flex item-center justify-end">
-          <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
-            <Edit size={16} />
+      <td className="px-6 py-4 whitespace-nowrap text-sm border-r font-bold text-indigo-500">
+        {amount}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        {showModal ? (
+          <div className="flex flex-row items-center justify-end">
+            <button
+              onClick={async () => {
+                handleDelete();
+              }}
+              className="p-2 rounded mx-2 focus:outline-none hover:text-red-400 border hover:border-red-400"
+            >
+              Confirm deletion
+            </button>
+            <button
+              onClick={toggleModal}
+              className="bg-gray-400 text-white p-2 rounded mx-2 focus:outline-none"
+            >
+              Cancel
+            </button>
           </div>
-          <div className="w-4 transform hover:text-red-400 hover:scale-110 cursor-pointer">
-            <Trash size={16} />
-          </div>
-        </div>
+        ) : (
+          <span className="flex items-center">
+            <Trash
+              size={18}
+              className="ml-auto text-gray-500 hover:text-red-400 cursor-pointer"
+              onClick={toggleModal}
+            />
+          </span>
+        )}
       </td>
     </tr>
   );

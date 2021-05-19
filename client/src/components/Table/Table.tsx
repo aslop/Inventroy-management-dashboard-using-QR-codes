@@ -5,33 +5,36 @@ import { Row } from './Row';
 
 interface IProps {
   items: any[];
+  tableHeads: string[];
 }
 
-export const Table: FC<IProps> = ({ items }) => {
+export const Table: FC<IProps> = ({ items, tableHeads }) => {
   return (
-    <div className="overflow-x-auto">
-      <div className="font-sans overflow-hidden">
-        <div className="w-full">
-          <div className="rounded-md overflow-hidden">
-            <table className="min-w-max w-full table-auto">
-              {/* Head */}
-              <thead>
-                <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">Name</th>
-                  <th className="py-3 px-6 text-left">Properties</th>
-                  <th className="py-3 px-6 text-left">Amount</th>
-                  <th className="py-3 px-6 text-right">Actions</th>
+    <div className="flex flex-col">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  {tableHeads.map((item, i) => {
+                    return (
+                      <th
+                        key={i}
+                        scope="col"
+                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-left last:text-right"
+                      >
+                        {item}
+                      </th>
+                    );
+                  })}
                 </tr>
               </thead>
-              {/* /Head */}
-
-              {/* Body */}
-              <tbody className="text-gray-600 text-sm font-light">
-                {items.map((item, i) => {
-                  return <Row key={i} item={item} />;
-                })}
+              <tbody className="bg-white divide-y divide-gray-200">
+                {items.map((item) => (
+                  <Row key={item.id} item={item} />
+                ))}
               </tbody>
-              {/* /BODY */}
             </table>
           </div>
         </div>

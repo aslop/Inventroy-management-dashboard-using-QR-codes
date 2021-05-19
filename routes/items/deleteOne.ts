@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { User } from '../../models/User';
 import { Item } from '../../models/Item';
 
-const getOne = async (req: Request, res: Response) => {
+const deleteOne = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -14,16 +14,13 @@ const getOne = async (req: Request, res: Response) => {
     }
 
     if (item.user == user.id) {
-      res.send({
-        id: item._id,
-        name: item.name,
-        amount: item.amount,
-        properties: item.properties,
-      });
+      const item = await Item.findOneAndDelete({ _id: id });
+
+      res.status(200).send('ok');
     }
   } catch (error) {
     res.status(500).send('server error');
   }
 };
 
-export default getOne;
+export default deleteOne;
