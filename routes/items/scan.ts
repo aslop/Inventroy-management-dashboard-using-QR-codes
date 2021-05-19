@@ -57,12 +57,6 @@ const scan = async (req: Request, res: Response) => {
         default:
           break;
       }
-      // res.send({
-      //   id: item._id,
-      //   name: item.name,
-      //   amount: item.amount,
-      //   properties: item.properties,
-      // });
     }
   } catch (error) {
     res.status(500).send('server error');

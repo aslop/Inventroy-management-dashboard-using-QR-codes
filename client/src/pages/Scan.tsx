@@ -27,13 +27,8 @@ export const Scan = () => {
           withCredentials: true,
         }
       );
-      console.log('---[ Will post: ]---');
-      console.log(data);
+
       setHasScanned(true);
-      console.log('---[ Will post: ]---');
-      // console.log('id', scan);
-      // console.log('action', action);
-      // console.log('amount', amount);
     }
   };
 
