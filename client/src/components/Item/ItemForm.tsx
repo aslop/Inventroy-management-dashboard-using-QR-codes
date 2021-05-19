@@ -48,7 +48,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
       });
 
       toggleForm();
-      setItems([...items, item]);
+      setItems([...items, { ...item, amount: 0 }]);
     } else {
       const {
         data: { item },
@@ -57,7 +57,7 @@ export const ItemForm: FC<IProps> = ({ items, setItems, toggleForm }) => {
       });
 
       toggleForm();
-      setItems([...items, item]);
+      setItems([...items, { ...item, amount: 0 }]);
     }
   };
 

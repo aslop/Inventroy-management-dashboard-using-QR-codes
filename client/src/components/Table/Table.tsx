@@ -17,9 +17,9 @@ export const Table: FC<IProps> = ({ items }) => {
               {/* Head */}
               <thead>
                 <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">ID</th>
                   <th className="py-3 px-6 text-left">Name</th>
                   <th className="py-3 px-6 text-left">Properties</th>
+                  <th className="py-3 px-6 text-left">Amount</th>
                   <th className="py-3 px-6 text-right">Actions</th>
                 </tr>
               </thead>

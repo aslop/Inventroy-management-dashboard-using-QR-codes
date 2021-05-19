@@ -1,13 +1,13 @@
 import { useAuth } from '../../hooks';
-import { Home, User, Archive } from 'react-feather';
+import { Home, User, Archive, Camera } from 'react-feather';
 import { NavItem } from './NavItem';
 
-export const SideNav = () => {
+export const MainNav = () => {
   const { logout, currentUser } = useAuth();
 
   return (
-    <div className="w-64 h-screen flex flex-col shadow-lg text-gray-600 p-3 color-white justify-between bg-white sticky top-0 left-0">
-      <ul className="text-sm">
+    <div className="flex flex-row shadow-lg text-gray-600 p-3 color-white justify-between bg-white w-full">
+      <div className="flex flex-row">
         {currentUser ? (
           <NavItem to="/">
             <Home size={18} className="mr-2 text-blue-400" />
@@ -22,6 +22,13 @@ export const SideNav = () => {
           </NavItem>
         ) : null}
 
+        {currentUser ? (
+          <NavItem to="/scan">
+            <Camera size={18} className="mr-2 text-blue-400" />
+            <span>Scan</span>
+          </NavItem>
+        ) : null}
+
         {currentUser ? null : (
           <NavItem to="/login">
             <User size={18} className="mr-2 text-blue-400" />
@@ -33,18 +40,18 @@ export const SideNav = () => {
           <User size={18} className="mr-2 text-blue-400" />
           <span>Register</span>
         </NavItem>
-      </ul>
 
-      {currentUser ? (
-        <button
-          onClick={async () => {
-            await logout();
-          }}
-          className="border border-red-300 text-red-300 hover:bg-red-300 hover:text-white text-sm px-4 py-2 rounded-md"
-        >
-          Logout
-        </button>
-      ) : null}
+        {currentUser ? (
+          <button
+            onClick={async () => {
+              await logout();
+            }}
+            className="border border-red-300 text-red-300 hover:bg-red-300 hover:text-white text-sm px-4 py-2 rounded-md"
+          >
+            Logout
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };

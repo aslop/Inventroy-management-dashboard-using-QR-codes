@@ -40,7 +40,7 @@ export const Home = () => {
 
       <div className="border rounded-md p-6 flex flex-col">
         <span className="text-gray-500 mb-2">Data from server: </span>
-        <span className="font-bold text-gray-800">{JSON.stringify(authedData)}</span>
+        <span className="font-bold text-gray-800 break-words">{JSON.stringify(authedData)}</span>
       </div>
     </div>
   );

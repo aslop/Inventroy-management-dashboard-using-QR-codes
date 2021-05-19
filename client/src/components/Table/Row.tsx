@@ -1,27 +1,34 @@
-import { FC } from 'react';
+import { FC, SyntheticEvent } from 'react';
 import { Edit, Trash } from 'react-feather';
-import QRCode from 'qrcode.react';
+import { useHistory } from 'react-router-dom';
 
 interface IProps {
   item: {
     id: string;
     name: string;
+    amount: number;
     properties: any;
   };
 }
 
-export const Row: FC<IProps> = ({ item: { id, name, properties } }) => {
+export const Row: FC<IProps> = ({ item: { id, name, properties, amount } }) => {
+  const history = useHistory();
+
   if (!id) {
     return null;
   }
 
+  const redirectToItem = (ev: SyntheticEvent) => {
+    ev.stopPropagation();
+
+    history.push(`/items/${id}`);
+  };
+
   return (
-    <tr className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer">
-      <td className="py-3 px-6 text-left whitespace-nowrap">
-        <div className="flex items-center">
-          <span className="font-medium">{id}</span>
-        </div>
-      </td>
+    <tr
+      className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
+      onClick={redirectToItem}
+    >
       <td className="py-3 px-6 text-left">
         <div className="flex items-center">
           <span>{name}</span>
@@ -30,6 +37,12 @@ export const Row: FC<IProps> = ({ item: { id, name, properties } }) => {
       <td className="py-3 px-6 text-center">
         <div className="flex items-center">{JSON.stringify(properties)}</div>
       </td>
+      <td className="py-3 px-6 text-left">
+        <div className="flex items-center">
+          <span>{amount}</span>
+        </div>
+      </td>
+
       <td className="py-3 px-6 text-center">
         <div className="flex item-center justify-end">
           <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer">

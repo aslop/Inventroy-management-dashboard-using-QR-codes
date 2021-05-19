@@ -15,6 +15,7 @@ const getAll = async (req: Request, res: Response) => {
         return {
           id: item.id,
           name: item.name,
+          amount: item.amount,
           properties: item.properties,
         };
       })
