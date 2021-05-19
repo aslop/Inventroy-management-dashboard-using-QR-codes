@@ -7,16 +7,11 @@ const navLinks = [
   { name: 'Home', href: '/', shouldBeAuthed: true },
   { name: 'Items', href: '/items', shouldBeAuthed: true },
   { name: 'Scan', href: '/scan', shouldBeAuthed: true },
-  { name: 'Register', href: '/register', shouldBeAuthed: false },
 ];
 
 export const MainNav = () => {
   const { logout, currentUser } = useAuth();
   const [showMenu, toggleMenu] = useToggle();
-  const expandedMenuRef = useRef<HTMLDivElement>(null);
-  useClickOutside(expandedMenuRef, () => {
-    toggleMenu();
-  });
 
   return (
     <>
@@ -41,14 +36,35 @@ export const MainNav = () => {
           );
         })}
 
-        <button
-          onClick={async () => {
-            await logout();
-          }}
-          className="ml-auto bg-red-400 rounded-md px-2 py-1 focus:outline-none hover:bg-red-500 cursor-pointer"
-        >
-          logout
-        </button>
+        <div className="ml-auto">
+          {currentUser ? null : (
+            <NavLink
+              exact={true}
+              to={'/login'}
+              activeClassName="bg-indigo-400 rounded-md"
+              className="mx-3 px-2 py-1"
+            >
+              Login
+            </NavLink>
+          )}
+          <NavLink
+            exact={true}
+            to={'/register'}
+            activeClassName="bg-indigo-400 rounded-md"
+            className="mx-3 px-2 py-1"
+          >
+            Register
+          </NavLink>
+
+          <button
+            onClick={async () => {
+              await logout();
+            }}
+            className="bg-red-400 rounded-md px-2 py-1 focus:outline-none hover:bg-red-500 cursor-pointer"
+          >
+            logout
+          </button>
+        </div>
       </div>
 
       <div className="w-full flex flex-col justify-center md:hidden ">
@@ -63,10 +79,7 @@ export const MainNav = () => {
 
         {/* Expanding menu */}
         {showMenu ? (
-          <div
-            ref={expandedMenuRef}
-            className="bg-white shadow-md pb-6 pt-3 absolute z-10 w-full top-12 left-0 flex flex-col"
-          >
+          <div className="bg-white shadow-md pb-6 pt-3 absolute z-10 w-full top-12 left-0 flex flex-col">
             {navLinks.map(({ href, name, shouldBeAuthed }) => {
               if (shouldBeAuthed && !currentUser) {
                 return null;
@@ -85,6 +98,40 @@ export const MainNav = () => {
                 </NavLink>
               );
             })}
+            <div className="w-full flex items-center justify-between border-t pt-5">
+              {currentUser ? null : (
+                <NavLink
+                  exact={true}
+                  to={'/login'}
+                  activeClassName="bg-indigo-400 rounded-md"
+                  className="mx-3 px-2 py-1 w-1/2 bg-indigo-400 text-center text-white rounded-md"
+                  onClick={toggleMenu}
+                >
+                  Login
+                </NavLink>
+              )}
+              <NavLink
+                exact={true}
+                to={'/register'}
+                activeClassName="bg-indigo-400 rounded-md"
+                className="mx-3 px-2 py-1 w-1/2 bg-indigo-400 text-center text-white rounded-md"
+                onClick={toggleMenu}
+              >
+                Register
+              </NavLink>
+
+              {currentUser ? (
+                <button
+                  onClick={async () => {
+                    toggleMenu();
+                    await logout();
+                  }}
+                  className="bg-red-400 text-white mx-3 px-2 py-1 rounded-md focus:outline-none hover:bg-red-500 cursor-pointer w-1/2"
+                >
+                  logout
+                </button>
+              ) : null}
+            </div>
           </div>
         ) : null}
         {/* Expanding menu */}
